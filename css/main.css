@@ -10,6 +10,9 @@
     --clients-button-color: #8E8F99;
     --footer-text-color: #E7E9FC;
     --footer-link-color: #31D0AA;
+    --border-icon-color: #D0D2E3;
+
+    --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -40,8 +43,19 @@ body {
 /*--header--*/
 
 .header {
+    position: fixed;
+    z-index: 1;
+    
+
+    width: 100%;
+    min-height: 76px;
+
+    top: 0;
+    left: 0;
+
     border-bottom: 1px solid #E7E9FC;
     box-shadow: 0px 2px 1px rgba(46, 47, 66, 0.08), 0px 1px 1px rgba(46, 47, 66, 0.16), 0px 1px 6px rgba(46, 47, 66, 0.08);
+    background-color: var(--primary-white-color)
 }
 
 .header-container {
@@ -107,6 +121,10 @@ body {
     vertical-align: top;
     text-decoration: none;
 
+    position: relative;
+
+    transition: 250ms var(--timing-function);
+
     color: var(--primary-text-color);
 
 }
@@ -114,6 +132,35 @@ body {
 .link:hover,
 .link:focus {
     color: var(--hover-color);
+}
+
+.link:active {
+    background-color: var(--hover-color);
+    
+}
+
+.link::after {
+    content: '';
+    display: block;
+
+    position: absolute;
+
+    border-radius: 2px;
+
+    width: 100%;
+    height: 4px;
+
+    left: 0;
+    bottom: 0;
+
+    transform: scaleX(0);
+    transition: transform 250ms var(--timing-function);
+
+    background-color: var(--hover-color);
+}
+
+.link:hover::after {
+    transform: scaleX(1);
 }
 
 .header-contacts {
@@ -135,6 +182,9 @@ body {
     font-size: 16px;
     line-height: 1.5;
     letter-spacing: 0.02em;
+
+    transition: 250ms var(--timing-function);
+
     color: var(--title-text-color);
 }
 
@@ -142,6 +192,7 @@ body {
 .contact-link:focus {
     color: var(--hover-color);
 }
+
 
 
 
@@ -229,6 +280,10 @@ body {
     border: 1px solid transparent;
     cursor: pointer;
 
+    transition: background-color 250ms var(--timing-function),
+    250ms var(--timing-function);
+
+
     color: var(--primary-white-color);
     background-color: var(--accent-color);
 }
@@ -236,8 +291,81 @@ body {
 .hero-button:hover,
 .hero-button:focus {
     background-color: var(--hover-color);
+    color: var(--background-team);
 }
 
+.backdrop {
+    position: fixed;
+
+    width: 100%;
+    height: 100%;
+
+    top: 0;
+    left: 0;
+
+    background-color: rgba(46, 47, 66, 0.7)
+}
+
+.backdrop.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.backdrop.is-hidden .modal {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.modal {
+    min-width: 408px;
+    min-height: 576px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%) scale(1);
+    transition: 250ms var(--timing-function);
+
+    background-color:  var(--primary-white-color);
+}
+
+
+.button-modal {
+    position: absolute;
+    
+    top:24px;
+    right:24px;
+
+    width: 24px;
+    height: 24px;
+
+    cursor: pointer;
+
+    border: 1px solid var(--border-icon-color);
+    border-radius: 50%;
+
+    padding: 0;
+
+    transition: background-color 250ms var(--timing-function);
+
+    background-color: var(--footer-text-color);
+    
+
+}
+
+.button-modal:hover,
+.button-modal:focus {
+    background-color: var(--hover-color);
+}
+
+.button-modal:hover .icon-close,
+.button-modal:focus .icon-close {
+    fill: var(--primary-white-color);
+}
+
+.icon-close {
+    transition: fill var(--timing-function);
+}
 
 
 
@@ -245,7 +373,9 @@ body {
 
 
 
-.about-section {}
+.about-section {
+
+}
 
 .about-container {
     width: 1158px;
@@ -498,7 +628,10 @@ body {
 
     border: none;
     border-radius: 50%;
+
     cursor: pointer;
+
+    transition: background-color 250ms var(--timing-function);
 
     fill: var(--primary-white-color);
     background-color: var(--accent-color);
@@ -566,6 +699,8 @@ body {
     border: 1px solid var(--clients-button-color);
     border-radius: 4px;
 
+    transition: border-color 250ms var(--timing-function);
+
 }
 
 .clients-list .item:not(:last-child) {
@@ -581,6 +716,8 @@ body {
     height: 100%;
     
     cursor: pointer;
+
+    transition: fill 250ms var(--timing-function);
 
     fill: var(--clients-button-color);
     background-color: var(--primary-white-color);
@@ -717,6 +854,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    transition: 250ms var(--timing-function);
 
     background-color: rgba(255, 255, 255, 0.1);
 }
